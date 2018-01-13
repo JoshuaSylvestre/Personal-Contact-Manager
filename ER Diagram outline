@@ -6,3 +6,12 @@ User:
       - Email
       - Username
       - Password
+
+Contacts:
+      - First name
+      - Last name
+      - Nickname
+      - Email
+      - Address 
+      - Home phone number           ******Not all fields are required**********
+      - Cell phone number
