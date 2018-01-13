@@ -1,5 +1,7 @@
 Feel free to edit!
 
+ENTITIES
+
 User:
       - First name
       - Last name
@@ -15,3 +17,5 @@ Contacts:
       - Address 
       - Home phone number           ******Not all fields are required**********
       - Cell phone number
+
+RELATIONSHIPS
