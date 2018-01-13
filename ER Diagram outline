@@ -12,13 +12,31 @@ User:
 Contacts:
       - First name
       - Last name
-      - Nickname
+      - Nickname ***Down below I made this the primary key. Just in case we want to do a search option***
       - Email
       - Address 
       - Home phone number           ******Not all fields are required**********
       - Cell phone number
 
 
+CREATE TABLE User (firstName CHAR (50),
+                   lastName CHAR (50),
+                   email CHAR (100),
+                   userName CHAR (50),
+                   password CHAR (50),
+                   PRIMARY KEY userName)
+                   
+CREATE TABLE Contacts(firstName CHAR (50),
+                      lastName CHAR (50),
+                      nickname CHAR (50),
+                      email CHAR (100),
+                      address CHAR (200),
+                      homePhone INTEGER,
+                      cellPhone INTEGER,
+                      PRIMARY KEY nickname)
+                      
+                      
+**Someone please give me a reason to have an Admin or a SuperAdmin thx***
 
 RELATIONSHIPS
 
@@ -27,7 +45,6 @@ Create User Account
 Create Contact ****** This is a one to many relationship. 1 user to many contacts*******
 
 Delete Contact ***I don't think this is necessarily a relationship but I do want to keep this here as a reminder***
-
 
 
 
