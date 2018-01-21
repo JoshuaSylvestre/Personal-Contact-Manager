@@ -2,10 +2,11 @@ var express = require('express');
 var passport = require('passport');
 var User = require('../models/user');
 var router = express.Router();
+var title = 'Personal Contact Manager'
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Personal Contact Manager', user : req.user });
+  res.render('index', { title: title, user : req.user });
 });
 
 /* GET Register page. */
@@ -15,7 +16,12 @@ router.get('/register', function(req, res) {
 
 /* GET Login page. */
 router.get('/login', function(req, res) {
-  res.render('login', { title: 'Login', user : req.body.username });
+  res.render('login', { title: 'Login', user : req.user });
+});
+
+/* GET Users page. */
+router.get('/users', function(req, res, next) {
+  res.render('users/index', { user : req.user });
 });
 
 /* POST to Register */
@@ -25,79 +31,25 @@ router.post('/register', function(req, res) {
       firstName : req.body.firstName,
       lastName : req.body.lastName,
       email : req.body.email,
-      username : req.body.username }), req.body.password, function(err, account) {
+      username : req.body.username }), req.body.password, function(err, user) {
     if (err) {
-        return res.render('register', { account : account });
+        return res.render('error', { user : user });
     }
 
     passport.authenticate('local')(req, res, function () {
-        res.redirect('/');
+        res.render('/users');
     });
   });
-    // // Set our internal DB variable
-    // var db = req.db;
-    //
-    // // Get our form values. These rely on the "name" attributes
-    // var firstName = req.body.firstName;
-    // var lastName = req.body.lastName;
-    // var email = req.body.email;
-    // var username = req.body.username;
-    // var password = req.body.password;
-    //
-    // // Set our collection
-    // var collection = db.get('users');
-    //
-    // // Submit to the DB
-    // collection.insert({
-    //     "firstName" : firstName,
-    //     "lastName" : lastName,
-    //     "email" : email,
-    //     "username" : username,
-    //     "password" : password
-    // }, function (err, doc) {
-    //     if (err) {
-    //         res.redirect('error');
-    //     }
-    //     else {
-    //         res.render('register', { user : username });
-    //     }
-    // });
 });
 
-// /* POST to Login */
-// router.post('/users', function(req, res) {
-//
-//     // Set our internal DB variable
-//     var db = req.db;
-//
-//     // Get our form values. These rely on the "name" attributes
-//     var username = req.body.username;
-//     var password = req.body.password;
-//
-//     // Set our collection
-//     var collection = db.get('users');
-//
-//     collection.find({
-//       "username" : username,
-//       "password" : password
-//     }, function (err, doc) {
-//       if (err) {
-//           res.redirect('error');
-//       }
-//       else {
-//           res.render('users', { user : username });
-//       }
-//     });
-//
-// });
-
+/* POST to Login. */
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+    res.render('users', { user : req.user});
 });
 
 router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.render('index', { title : title });
 });
 
 router.get('/ping', function(req, res){
