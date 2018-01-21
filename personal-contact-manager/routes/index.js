@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 /* GET Register page. */
 router.get('/register', function(req, res) {
-  res.render('register', { title: 'Register' });
+  res.render('register', { title: 'Register', success : true });
 });
 
 /* GET Login page. */
@@ -26,6 +26,9 @@ router.get('/users', function(req, res, next) {
 
 /* POST to Register */
 router.post('/register', function(req, res) {
+
+  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.username || !req.body.password)
+    res.render('register', { title : 'Register', success : false });
 
   User.register(new User({
       firstName : req.body.firstName,
