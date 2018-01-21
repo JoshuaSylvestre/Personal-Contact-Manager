@@ -16,7 +16,7 @@ router.get('/register', function(req, res) {
 
 /* GET Login page. */
 router.get('/login', function(req, res) {
-  res.render('login', { title: 'Login', user : req.user });
+  res.render('login', { title: 'Login', user : req.user, success : true });
 });
 
 /* GET Users page. */
@@ -46,17 +46,23 @@ router.post('/register', function(req, res) {
 });
 
 /* POST to Login. */
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.render('users', { user : req.user});
+router.post('/login', function(req, res) {
+  passport.authenticate('local', function(err, user, info){
+    if(err)
+      res.render('error');
+
+    if(!user)
+      res.render('login', { title : 'Login', success : false });
+
+    passport.authenticate('local')(req, res, function () {
+        res.render('users', { user : user });
+    });
+  })(req, res);
 });
 
 router.get('/logout', function(req, res) {
     req.logout();
     res.render('index', { title : title });
-});
-
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
 });
 
 module.exports = router;

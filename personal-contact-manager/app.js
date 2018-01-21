@@ -42,11 +42,6 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(function(req,res,next){
-//     req.db = db;
-//     next();
-// });
-
 app.use('/', index);
 app.use('/users', users);
 
