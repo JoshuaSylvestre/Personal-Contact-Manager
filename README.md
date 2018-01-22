@@ -33,7 +33,6 @@ After cloning, make sure you have the components of the MEAN stack supported on 
 > MongoDB: https://www.mongodb.com/download-center#compass
 > Node.js: https://nodejs.org/en/download/
 > ```
-
 > Then, use `npm` in PowerShell to download the rest of the components of the stack!
 > ```
 > $ npm install express
