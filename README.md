@@ -28,7 +28,17 @@ After cloning, make sure you have the components of the MEAN stack supported on 
 > ```
 >
 > ### Windows MEAN Installation
-> ~ Someone who has Windows pls fill out :) ~
+> ~ Download and run the installer for MongoDB, Node,js from the following links:
+> ```
+> MongoDB: https://www.mongodb.com/download-center#compass
+> Node.js: https://nodejs.org/en/download/
+> ```
+
+> Then, use `npm` in PowerShell to download the rest of the components of the stack!
+> ```
+> $ npm install express
+> $ npm install -g @angular/cli
+> ```
 
 Make sure you are in the freshly-cloned git repository and move to the project directory.
 ```
