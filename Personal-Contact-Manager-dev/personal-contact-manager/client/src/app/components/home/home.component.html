@@ -1,0 +1,38 @@
+<!-- You can ignore the code from here, this is just the welcome page
+We can design this later, the purpose of this project is to get angular to work right-->
+
+
+<div class="jumbotron text-center">
+  <h1>MEAN Stack Application</h1>
+  <p class="lead">Welcome to the MEAN Stack Application by <strong>  The Poop Squad </strong></p>
+  <div>
+
+<!--     <a routerLink="/register" class="btn btn-primary">Register</a>
+    <a routerLink="/login" class="btn btn-default">Login</a> -->
+
+  </div>
+</div>
+
+<body>
+  <div class="row">
+	<div class="container">
+		<h2 class="page-header" >Login</h2>
+		<form class="form-signin" (submit)="onLoginSubmit()">
+		        <div class="form-group">
+		          <label for="Username">Username</label>
+		          <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="username" name="username">
+		        </div>
+		        <div class="form-group">
+		        <label for="Password">Password</label>
+		        <input type="password" class="form-control" placeholder=" Enter Password" [(ngModel)]="password" name="password">
+		        </div>
+		        <div class="checkbox">
+		          <label>
+		            <input type="checkbox" value="remember-me"> Remember me
+		          </label>
+		        </div>
+		        <input class="btn btn-lg btn-primary" type="submit" value="Login">
+		</form>
+	</div>
+</div>
+</body>

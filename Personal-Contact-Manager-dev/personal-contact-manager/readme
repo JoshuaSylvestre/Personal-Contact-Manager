@@ -1,0 +1,11 @@
+the port 3000: will be your back end
+the port 4200: will be your front end where the angularjs work
+
+For windows users(similar with MAC OS users)
+because I used git bash:
+1. After cloned from github
+2. Follow Dita's instructions in README before this one then
+2. use: ng serve
+              in the client folder and wait until it compiled successfully
+3. go to localhost:4200
+4. Boom !! :)
