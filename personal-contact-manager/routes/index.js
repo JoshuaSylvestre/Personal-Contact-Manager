@@ -21,7 +21,7 @@ router.get('/login', function(req, res) {
 
 /* GET Users page. */
 router.get('/users', function(req, res, next) {
-  res.render('users/index', { user : req.user });
+  res.render('users/index', { title : 'Contacts', user : req.user });
 });
 
 /* POST to Register */
@@ -46,7 +46,8 @@ router.post('/register', function(req, res) {
   });
 });
 
-/* POST to Login. */
+
+/* POST to Users. */
 router.post('/users', function(req, res) {
   passport.authenticate('local', function(err, user, info){
     if(err)
