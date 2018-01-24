@@ -2,6 +2,18 @@ extends ../layout
 
 block content
   h1= title
+  p Your user id is #{user._id}
+
   a(href="/users") Back
   br
   a(href="/logout") Logout
+
+  p Your contacts are:
+  if user.contacts
+    each contact in user.contacts
+      div Name: #{contact.firstName} #{contact.lastName}
+      div Nickname: #{contact.firstName}
+      div Address: #{contact.address}
+      div Email: #{contact.email}
+      div Home Phone: #{contact.homePhone}
+      div Cell Phone: #{contact.cellPhone}

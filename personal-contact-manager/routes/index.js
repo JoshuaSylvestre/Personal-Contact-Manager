@@ -34,10 +34,11 @@ router.post('/register', function(req, res) {
       firstName : req.body.firstName,
       lastName : req.body.lastName,
       email : req.body.email,
-      username : req.body.username }), req.body.password, function(err, user) {
-    if (err) {
-        return res.render('error', { user : user });
-    }
+      username : req.body.username
+      }), req.body.password, function(err, user) {
+      if (err) {
+          return res.render('error', { user : user });
+      }
 
     passport.authenticate('local')(req, res, function () {
         res.render('users', { user : user });
@@ -46,7 +47,7 @@ router.post('/register', function(req, res) {
 });
 
 /* POST to Login. */
-router.post('/login', function(req, res) {
+router.post('/users', function(req, res) {
   passport.authenticate('local', function(err, user, info){
     if(err)
       res.render('error');
