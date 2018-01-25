@@ -10,7 +10,7 @@ var Contact = new Schema({
     address: { type: String, required: true },
     email: { type: String, required: true },
     homePhone: { type: String, required: true },
-    cellPhone: { type: String, required: true },
+    cellPhone: { type: String, required: true }
 });
 
 Contact.set('collection', 'Contacts');
