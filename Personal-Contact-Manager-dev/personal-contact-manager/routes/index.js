@@ -21,7 +21,7 @@ router.get('/login', function(req, res) {
 
 /* GET Users page. */
 router.get('/users', function(req, res, next) {
-  res.render('users/index', { user : req.user });
+  res.render('users/index', { title : 'Contacts', user : req.user });
 });
 
 /* POST to Register */
@@ -34,10 +34,11 @@ router.post('/register', function(req, res) {
       firstName : req.body.firstName,
       lastName : req.body.lastName,
       email : req.body.email,
-      username : req.body.username }), req.body.password, function(err, user) {
-    if (err) {
-        return res.render('error', { user : user });
-    }
+      username : req.body.username
+      }), req.body.password, function(err, user) {
+      if (err) {
+          return res.render('error', { user : user });
+      }
 
     passport.authenticate('local')(req, res, function () {
         res.render('users', { user : user });
@@ -45,8 +46,9 @@ router.post('/register', function(req, res) {
   });
 });
 
-/* POST to Login. */
-router.post('/login', function(req, res) {
+
+/* POST to Users. */
+router.post('/users', function(req, res) {
   passport.authenticate('local', function(err, user, info){
     if(err)
       res.render('error');

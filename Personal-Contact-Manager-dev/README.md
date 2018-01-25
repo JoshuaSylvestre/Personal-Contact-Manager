@@ -1,6 +1,6 @@
 # Personal Contact Manager
 
-<b>Members</b>: Haerunnisa Dewindita, Steve Dang, Alana Arjune, Joshua Sylvestre, Subhash Naidu, and Abe Isleem
+<b>Members</b>: Haerunnisa Dewindita, Steve Dang, Alana Arjune, Joshua Sylvestre, Subhash Naidu, and Abdulfattah Isleem
 
 This program is a personal contact manager created for Richard Leinecker's Spring 2018 COP4331C class. It supports encyrpted logins for each user, contact lookup, deletion and insertion!
 
@@ -28,7 +28,16 @@ After cloning, make sure you have the components of the MEAN stack supported on 
 > ```
 >
 > ### Windows MEAN Installation
-> ~ Someone who has Windows pls fill out :) ~
+> ~ Download and run the installer for MongoDB, Node,js from the following links:
+> ```
+> MongoDB: https://www.mongodb.com/download-center#compass
+> Node.js: https://nodejs.org/en/download/
+> ```
+> Then, use `npm` in PowerShell to download the rest of the components of the stack!
+> ```
+> $ npm install express
+> $ npm install -g @angular/cli
+> ```
 
 Make sure you are in the freshly-cloned git repository and move to the project directory.
 ```
