@@ -1,6 +1,19 @@
 extends layout
 
+
 block content
-  h1 Uh, oh! Spaghetti O's!
+  h1 Uh, oh! Looks like you've reached the ERROR page!
+  h4 Here are some links to help you!
+  
+  br
+  br
+  br
+  p Need the login page? Here it is!  #[a(href="/login") Login]
+
+    br
+
+  p Or do you need the register page? Well here's the link! #[a(href="/register") Register]
+
+
   h2= error.status
   //pre #{error.stack}
