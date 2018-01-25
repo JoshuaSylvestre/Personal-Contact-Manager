@@ -9,7 +9,7 @@ var User = new Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     username: { type: String, required: true },
-    password: String
+    password: { type: String, require: true }
 });
 
 User.plugin(passportLocalMongoose);

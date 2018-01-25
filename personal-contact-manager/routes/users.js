@@ -33,7 +33,7 @@ router.get('/contacts', function(req, res, next) {
 });
 
 /* POST new Contact */
-router.post('/contacts', function(req, res) {
+router.post('/contacts', function(req, res) { 
   if (!req.body.firstName || !req.body.lastName || !req.body.nickname || !req.body.address || !req.body.email || !req.body.homePhone || !req.body.cellPhone)
     res.render('contacts', {title: 'Add Contact', success : false});
 
