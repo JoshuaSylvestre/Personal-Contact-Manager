@@ -1,6 +1,6 @@
 # Personal Contact Manager
 
-<b>Members</b>: Haerunnisa Dewindita, Steve Dang, John Albury, Alana Arjune, Joshua Sylvestre, Subhash Naidu, and Abdulfattah Isleem
+<b>Members</b>: Haerunnisa Dewindita, Huy Dang, John Albury, Alana Arjune, Joshua Sylvestre, Subhash Naidu, and Abdulfattah Isleem
 
 This program is a personal contact manager created for Richard Leinecker's Spring 2018 COP4331C class. It supports encyrpted logins for each user, contact lookup, deletion and insertion!
 
