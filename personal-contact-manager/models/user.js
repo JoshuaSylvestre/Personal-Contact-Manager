@@ -4,7 +4,6 @@ var ObjectId = Schema.Types.ObjectId;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
-    _id : { type : ObjectId},
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
@@ -13,6 +12,5 @@ var User = new Schema({
 });
 
 User.plugin(passportLocalMongoose);
-User.set("collection", "users");
 
 module.exports = mongoose.model('User', User);
