@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  h1 Welcome to your very own Contact Manager!
+  
+  p Here you can store contact information, such as names, numbers, and address. Contacts are easy to search and easy to delete. 
+  br
+  br
+  div
+     center
+       h5 This website was developed using the MEAN stack
+       img(src= "/m2.png")
+
+  br
+  br
+  div
+      center
+          h5 #[a(style={color: 'green'}) Mongo DB]
+  p This is our database program. Mongo is known to be a NoSQL program that uses a document-oriented data model. Mongo is known for storing data in JSON-like documents, this means that documents can have varying fields and the data structure can be changed over time.
+  br
+  br
+  div
+        center
+          h5 Express
+  p Express is a lightweight framework that Node uses to build web applications. It allows many features that can be used to build not only single page websites, but also multi page applications.
+  br
+  br
+  div
+        center
+          h5 #[a(style={color: 'red'}) AngularJS]
+  p As you can tell from the JS, Angular JS is a Javascript framework created by Google. It is used for front end development and can be thought of as an extension of HTML.          
+  br
+  br
+  div
+        center
+          h5 #[a(style={color: 'limegreen'}) Node.js]
+  p Node.js is a server side Javascript execution environment. This means that Node.js can run scipts on the server side and produce dynamic web page content before the page is even sent to the user's web browser.
+
+  br
+  br
+  a(href="/users/contacts") Contacts
+  br
+  a(href="/logout") Logout
