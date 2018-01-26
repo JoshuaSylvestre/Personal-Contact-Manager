@@ -1,6 +1,21 @@
 extends layout
 
 block content
-  h1 Uh, oh! Spaghetti O's!
+  h1 Uh, oh! Looks like you've reached the #[a(style={color: 'red'}) ERROR] page!
+  h4 Here are some links to help you!
+  br
+
+  p Need the login page? Here it is!  #[a(href="/login") Login]
+
+    br
+
+  p Or do you need the register page? Well here's the link! #[a(href="/register") Register]
+
+  p Not sure what to do? Here are some cats!
+  div.thumbnail
+     img(src= "/cats.gif")
+
+
   h2= error.status
   //pre #{error.stack}
+  //img(src= "https://giphy.com/gifs/cute-kitten-3GgKk4Bv58Mwg")
