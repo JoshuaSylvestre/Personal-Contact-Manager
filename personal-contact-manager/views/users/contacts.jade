@@ -1,5 +1,5 @@
 extends ../layout
-script(type="javascript",src='../../public/javascripts/delete.js')
+//script(type="javascript",src='../../public/javascripts/global.js')
 
 block content
   br
@@ -8,51 +8,38 @@ block content
   br
   br
   h4 Add Contact
-  form(role='form', method="post")
-    .row
-      .form-group.col-md-6
-        input.form-control(type='text', name="firstName", placeholder='First Name')
-      .form-group.col-md-6
-        input.form-control(type='text', name="lastName", placeholder='Last Name')
-      .form-group.col-md-6
-        input.form-control(type='text', name="nickname", placeholder='Nickname')
-      .form-group.col-md-6
-        input.form-control(type='text', name="address", placeholder='Address')
-    .row
-      .form-group.col-md-6
-        input.form-control(type='text', name="email", placeholder='Email')
-      .form-group.col-md-6
-        input.form-control(type='text', name="homePhone", placeholder='Home Phone')
-      .form-group.col-md-6
-        input.form-control(type='text', name="cellPhone", placeholder='Cell Phone')
-    br
-    button.btn.btn-primary(type='submit', style="align=center;") Add
-
+  #addUser
+    fieldset
+      .row
+        .form-group.col-md-6
+          input#inputFirstName.form-control(type='text', name="firstName", placeholder='First Name')
+        .form-group.col-md-6
+          input#inputLastName.form-control(type='text', name="lastName", placeholder='Last Name')
+        .form-group.col-md-6
+          input#inputNickname.form-control(type='text', name="nickname", placeholder='Nickname')
+        .form-group.col-md-6
+          input#inputAddress.form-control(type='text', name="address", placeholder='Address')
+      .row
+        .form-group.col-md-6
+          input#inputEmail.form-control(type='text', name="email", placeholder='Email')
+        .form-group.col-md-6
+          input#inputHomePhone.form-control(type='text', name="homePhone", placeholder='Home Phone')
+        .form-group.col-md-6
+          input#inputCellPhone.form-control(type='text', name="cellPhone", placeholder='Cell Phone')
+      br
+      button#btnAddUser.btn.btn-primary Add
   br
   br
   br
-  div#contactsTable
+  #contactsTable
     table.table
       thead
-        tr
-          th First Name
-          th Last Name
-          th Nickname
-          th Address
-          th Email
-          th Home Phone
-          th Cell Phone
+        th First Name
+        th Last Name
+        th Nickname
+        th Address
+        th Email
+        th Home Phone
+        th Cell Phone
+        th 
       tbody
-        each contact in contactsList
-          tr
-            td #{contact.firstName}
-            td #{contact.lastName}
-            td #{contact.nickname}
-            td #{contact.address}
-            td #{contact.email}
-            td #{contact.homePhone}
-            td #{contact.cellPhone}
-            td
-              button.btn.btn-danger(type="button") Delete
-
-  //a(href="/logout") Logout
