@@ -4,11 +4,17 @@ block content
   h1= title
   if (!user)
     p Welcome to #{title}!
-    a(href="/login") Login
+    a(href="/login") 
+      button.btn.btn-primary(type="button") Login
     br
-    a(href="/register") Register
+    br
+    a(href="/register")
+      button.btn.btn-danger(type="button") Register
   if (user)
     p You are currently logged in as #{user.username}.
-    a(href="/users/contacts") Contacts
+    a(href="/users/contacts") 
+      button.btn.btn-primary(type="button") Contacts
     br
-    a(href="/logout") Logout
+    br
+    a(href="/logout") 
+      button.btn.btn-danger(type="button") Logout

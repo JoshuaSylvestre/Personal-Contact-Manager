@@ -1,4 +1,5 @@
 extends ../layout
+script(type="javascript",src='../../public/javascripts/delete.js')
 
 block content
   h1= title
@@ -48,4 +49,5 @@ block content
             td #{contact.cellPhone}
             td
               button.btn.btn-danger(type="button") Delete
-  a(href="/logout") Logout
+              
+  //a(href="/logout") Logout
