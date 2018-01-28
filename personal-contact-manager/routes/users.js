@@ -10,12 +10,8 @@ var uri = 'mongodb://poopsquad:poopsquad@poop-cluster-shard-00-00-yv2oe.mongodb.
 mongoose.connect(uri);
 var db = mongoose.connection;
 
-// router.get('/', function(req, res, next) {
-//   res.render('users/index', { user : req.user });
-// });
-
 router.get('/users', function(req, res, next) {
-  res.render('users/index', { user : req.user });
+  res.render('users/index', { title : 'Contacts', user : req.user });
 });
 
 router.get('/userlist', function(req, res, next) {
@@ -32,7 +28,10 @@ router.get('/userlist', function(req, res, next) {
 });
 
 router.get('/contacts', function(req, res, next) {
-  res.render('users/contacts', { user : req.user });
+  if(!req.user)
+    res.render("error");
+
+  res.render('users/contacts', { title : 'Contacts', user : req.user });
 });
 
 router.post('/adduser', function(req, res) {

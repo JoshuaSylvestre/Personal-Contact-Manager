@@ -3,12 +3,12 @@ extends ../layout
 block content
   br
   br
-  p Hey there, #{user.username}!
+  h2 Hey there, #{user.firstName}!
     br
     br
-    a(href="/users/contacts") 
+    a(href="/users/contacts")
       button.btn.btn-primary(type="button") Contacts
-    br
-    br
-    a(href="/logout") 
+    |&nbsp;
+    |&nbsp;
+    a(href="/logout")
       button.btn.btn-danger(type="button") Logout
