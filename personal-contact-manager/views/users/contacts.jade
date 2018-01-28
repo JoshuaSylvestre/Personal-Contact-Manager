@@ -2,8 +2,11 @@ extends ../layout
 script(type="javascript",src='../../public/javascripts/delete.js')
 
 block content
+  br
   h1= title
 
+  br
+  br
   h4 Add Contact
   form(role='form', method="post")
     .row
@@ -22,9 +25,11 @@ block content
         input.form-control(type='text', name="homePhone", placeholder='Home Phone')
       .form-group.col-md-6
         input.form-control(type='text', name="cellPhone", placeholder='Cell Phone')
-
+    br
     button.btn.btn-primary(type='submit', style="align=center;") Add
 
+  br
+  br
   br
   div#contactsTable
     table.table
@@ -49,5 +54,5 @@ block content
             td #{contact.cellPhone}
             td
               button.btn.btn-danger(type="button") Delete
-              
+
   //a(href="/logout") Logout
