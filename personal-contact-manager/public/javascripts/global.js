@@ -3,12 +3,17 @@ $(document).ready(function() {
 
     // Populate the user table on initial page load
     listUsers();
+
     // Onclick event for add user
     $('#btnAddUser').on('click', addUser);
+
     // Onclick event for YOU GUESSED IT! delete user
     $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
-	// Onclick event for search button
+	
+	// Need to use keyup since keypress eats user input :x
 	$('#inputSearch').on('keyup', searchUser);
+
+	// Onclick event for search button
 	$('#btnSearchUser').on('click', searchUser);
 	
 });
@@ -125,14 +130,15 @@ function deleteUser(event) {
 function searchUser(event) {
 	
   event.preventDefault();
-	  // USER LIST FORMAT:
+  
+  // USER LIST FORMAT:
   // firstName, lastName, nickname, address, email, homePhone, cellPhone
 
   var substr = document.getElementById('inputSearch').value
 
 //  console.log(substr);
   
-  // Empty search results
+  // Empty search results to keep search up to date
   var tableContent = '';
   tableContent += '<tr>';
   tableContent += '</tr>';  
@@ -140,7 +146,7 @@ function searchUser(event) {
   // jQuery AJAX call for JSON
   $.getJSON('/users/userlist', function(data) {
 
-      // For each item in the JSON, add a table row and cells to the content string
+      // For each item in the JSON, only print for desired substrings
       $.each(data, function(){
 		  if(this.firstName.concat(" " + this.lastName).toLowerCase().indexOf(substr) != -1)
 		  {
