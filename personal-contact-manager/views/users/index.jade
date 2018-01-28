@@ -1,8 +1,14 @@
 extends ../layout
 
 block content
-  p Hey there, #{user.username}!
-
-  a(href="/users/contacts") Contacts
   br
-  a(href="/logout") Logout
+  br
+  p Hey there, #{user.username}!
+    br
+    br
+    a(href="/users/contacts") 
+      button.btn.btn-primary(type="button") Contacts
+    br
+    br
+    a(href="/logout") 
+      button.btn.btn-danger(type="button") Logout

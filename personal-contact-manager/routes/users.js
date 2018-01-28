@@ -68,6 +68,14 @@ router.post('/contacts', function(req, res) {
     }});
 });
 
+router.get('/about', function(req, res, next) {
+  res.render('users/about', { user : req.user });
+});
+
+router.get('/profile', function(req, res, next) {
+  res.render('users/profile', { user : req.user });
+});
+
 router.get('/logout', function(req, res) {
     req.logout();
     res.render('index', { title : 'Personal Contact Manager' });
