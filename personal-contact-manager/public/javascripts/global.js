@@ -7,6 +7,10 @@ $(document).ready(function() {
     $('#btnAddUser').on('click', addUser);
     // Onclick event for YOU GUESSED IT! delete user
     $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
+	// Onclick event for search button
+	$('#inputSearch').on('keyup', searchUser);
+	$('#btnSearchUser').on('click', searchUser);
+	
 });
 
 function listUsers() {
@@ -117,3 +121,44 @@ function deleteUser(event) {
     });
 
 };
+
+function searchUser(event) {
+	
+  event.preventDefault();
+	  // USER LIST FORMAT:
+  // firstName, lastName, nickname, address, email, homePhone, cellPhone
+
+  var substr = document.getElementById('inputSearch').value
+
+//  console.log(substr);
+  
+  // Empty search results
+  var tableContent = '';
+  tableContent += '<tr>';
+  tableContent += '</tr>';  
+
+  // jQuery AJAX call for JSON
+  $.getJSON('/users/userlist', function(data) {
+
+      // For each item in the JSON, add a table row and cells to the content string
+      $.each(data, function(){
+		  if(this.firstName.concat(" " + this.lastName).toLowerCase().indexOf(substr) != -1)
+		  {
+			tableContent += '<tr>';
+			tableContent += '<td>' + this.firstName + '</td>';
+			tableContent += '<td>' + this.lastName + '</td>';
+			tableContent += '<td>' + this.nickname + '</td>';
+			tableContent += '<td>' + this.address + '</td>';
+			tableContent += '<td>' + this.email + '</td>';
+			tableContent += '<td>' + this.homePhone + '</td>';
+			tableContent += '<td>' + this.cellPhone + '</td>';
+			tableContent += '<td><button href="#" class="deleteUserLink btn btn-danger" rel="' + this._id + '">Delete</button></td>';
+			tableContent += '</tr>';			  
+		  }
+      });
+	  
+	  // Inject the whole content string into our existing HTML table
+      $('#contactsTable table.table tbody').html(tableContent);
+ 
+    });
+}
