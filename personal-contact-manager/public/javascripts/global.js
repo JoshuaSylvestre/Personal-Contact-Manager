@@ -3,21 +3,23 @@ $(document).ready(function() {
   if(window.location.href.indexOf("users/") > -1) {
     // Populate the user table on initial page load
     listUsers();
+
+    // Onclick event for add user
+    $('#btnAddUser').on('click', addUser);
+
+    // Onclick event for YOU GUESSED IT! delete user
+    $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
+
+  	// Need to use keyup since keypress eats user input :x
+  	$('#inputSearch').on('keyup', searchUser);
+
+  	// Onclick event for search button
+  	$('#btnSearchUser').on('click', searchUser);
   }
-  // Onclick event for add user
-  $('#btnAddUser').on('click', addUser);
-
-  // Onclick event for YOU GUESSED IT! delete user
-  $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
-
-	// Need to use keyup since keypress eats user input :x
-	$('#inputSearch').on('keyup', searchUser);
-
-	// Onclick event for search button
-	$('#btnSearchUser').on('click', searchUser);
-
-  $('#btnLoginUser').on('click', loginUser);
-  $('#btnRegisterUser').on('click', registerUser);
+  else {
+    $('#btnLoginUser').on('click', loginUser);
+    $('#btnRegisterUser').on('click', registerUser);
+  }
 
 });
 
@@ -127,7 +129,7 @@ function listUsers() {
   var tableContent = '';
 
   // jQuery AJAX call for JSON
-  $.getJSON('userlist', function(data) {
+  $.getJSON('/users/userlist', function(data) {
 
       // For each item in the JSON, add a table row and cells to the content string
       $.each(data, function(){
@@ -176,7 +178,7 @@ function addUser(event) {
         $.ajax({
             type: 'POST',
             data: newUser,
-            url: '/adduser',
+            url: '/users/adduser',
             dataType: 'JSON'
         }).done(function( response ) {
 
@@ -211,7 +213,7 @@ function deleteUser(event) {
 
     $.ajax({
         type: 'DELETE',
-        url: '/deleteuser/' + $(this).attr('rel')
+        url: '/users/deleteuser/' + $(this).attr('rel')
     }).done(function( response ) {
 
         // Check for a successful (blank) response
@@ -220,7 +222,6 @@ function deleteUser(event) {
         else {
             alert('Error: ' + response.msg);
         }
-
         // Update the table
         listUsers();
 
@@ -243,7 +244,7 @@ function searchUser(event) {
   tableContent += '</tr>';
 
   // jQuery AJAX call for JSON
-  $.getJSON('/userlist', function(data) {
+  $.getJSON('/users/userlist', function(data) {
 
       // For each item in the JSON, only print for desired substrings
       $.each(data, function(){
