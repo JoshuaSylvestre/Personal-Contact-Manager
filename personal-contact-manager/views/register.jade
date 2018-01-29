@@ -3,8 +3,12 @@ extends layout
 block content
   h1=title
   br
-  p#registerErrorGeneric.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') Cannot register user at the moment. Please try again!
-  p#registerErrorIncomplete.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') Please fill in all fields!
+  .userErrors
+    .alert.alert-danger#registerErrorExists(style='max-width: 300px; padding:5px; text-align:center; display:none;') User with that email already exists.&nbsp;
+      a.alert-link(href="/login") Login here.
+    .alert.alert-danger#registerErrorGeneric(style='max-width: 300px; padding:5px; text-align:center; display:none;') Cannot register user at the moment. Please try again!
+    .alert.alert-danger#registerErrorIncomplete(style='max-width: 300px; padding:5px; text-align:center; display:none;') Please fill in all fields!
+    .alert.alert-danger#registerErrorEmail(style='max-width: 300px; padding:5px; text-align:center; display:none;') Please use a correct email format!
 
   #registerUser
     fieldset(style="width:300px;")

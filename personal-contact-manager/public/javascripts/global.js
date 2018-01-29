@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  
   if(window.location.href.indexOf("users/") > -1) {
     // Populate the user table on initial page load
     listUsers();
@@ -34,40 +35,44 @@ function registerUser() {
 
   // Check and make sure errorCount's still at zero
   if(errorCount === 0) {
-      // If it is, compile all user info into one object
-      var registerUser = {
-        'firstName': $('#registerUser fieldset input#inputFirstName').val().trim(),
-        'lastName': $('#registerUser fieldset input#inputLastName').val().trim(),
-        'email': $('#registerUser fieldset input#inputEmail').val().trim(),
-        'username': $('#registerUser fieldset input#inputUsername').val().trim(),
-        'password': $('#registerUser fieldset input#inputPassword').val()
+    // If it is, compile all user info into one object
+    var registerUser = {
+      'firstName': $('#registerUser fieldset input#inputFirstName').val().trim(),
+      'lastName': $('#registerUser fieldset input#inputLastName').val().trim(),
+      'email': $('#registerUser fieldset input#inputEmail').val().trim(),
+      'username': $('#registerUser fieldset input#inputUsername').val().trim(),
+      'password': $('#registerUser fieldset input#inputPassword').val()
+    }
 
+    // Use AJAX to post the object to our adduser service
+    $.ajax({
+      type: 'POST',
+      data: registerUser,
+      url: '/register',
+      dataType: 'JSON'
+    }).done(function(response) {
+      // Check for successful (blank) response
+      if (response.msg === '') {
+          // Successful log
+          window.location.href = 'users/contacts';
       }
-
-      // Use AJAX to post the object to our adduser service
-      $.ajax({
-        type: 'POST',
-        data: registerUser,
-        url: '/register',
-        dataType: 'JSON'
-      }).done(function(response) {
-        // Check for successful (blank) response
-        if (response.msg === '') {
-            // Successful log
-            window.location.href = 'users/contacts';
-        }
-        else {
-          if($('#registerErrorIncomplete').is(":visible"))
-            $('#registerErrorIncomplete').hide();
-
-          $('#registerErrorGeneric').show();
-        }
-      });
+      // If the user exists, don't register them fool
+      else if(response.msg === 'EXS'){
+        $('.userErrors').children().hide();
+        $('#registerErrorExists').show();
+      }
+      else if(response.msg === 'EML') {
+        $('.userErrors').children().hide();
+        $('#registerErrorEmail').show();
+      }
+      else {
+        $('.userError').children().hide();
+        $('#registerErrorGeneric').show();
+      }
+    });
   }
   else {
-    if($('#registerErrorGeneric').is(":visible"))
-      $('#registerErrorGeneric').hide();
-
+    $('.userErrors').children().hide();
     // If errorCount is more than 0, error out
     $('#registerErrorIncomplete').show();
     return false;
@@ -104,20 +109,16 @@ function loginUser() {
             window.location.href = 'users/contacts';
         }
         else if(response.msg === 'DNE') {
-          if($('#loginErrorIncomplete').is(":visible"))
-            $('#loginErrorIncomplete').hide();
-
+          $('.userErrors').children().hide();
           $('#loginErrorDNE').show();
         }
       });
   }
   else {
-    if($('#loginErrorDNE').is(":visible"))
-      $('#loginErrorDNE').hide();
-
-      // If errorCount is more than 0, error out
-      $('#loginErrorIncomplete').show();
-      return false;
+    $('.userErrors').children().hide();
+    // If errorCount is more than 0, error out
+    $('#loginErrorIncomplete').show();
+    return false;
   }
 };
 
