@@ -27,37 +27,46 @@ router.get('/users', function(req, res, next) {
 /* POST to Register */
 router.post('/register', function(req, res) {
 
-  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.username || !req.body.password)
-    res.render('register', { title : 'Register', success : false });
+  if(req.body.email.trim().indexOf('@') < 0) {
+    return res.send({ msg : 'EML' });
+  }
 
-  User.register(new User({
-      firstName : req.body.firstName,
-      lastName : req.body.lastName,
-      email : req.body.email,
-      username : req.body.username
-      }), req.body.password, function(err, user) {
-      if (err) {
-          return res.render('error', { user : user });
-      }
+  User.find({ email : req.body.email}, function (err, docs) {
+    if (docs.length > 0) {
+      return res.send({ msg : 'EXS' });
+    }
+    else {
+      User.register(new User({
+          firstName : req.body.firstName,
+          lastName : req.body.lastName,
+          email : req.body.email,
+          username : req.body.username
+          }), req.body.password, function(err, user) {
 
-    passport.authenticate('local')(req, res, function () {
-        res.render('users', { user : user });
-    });
+          if (err) {
+              return res.send({ msg : 'GEN' });
+          }
+
+        passport.authenticate('local')(req, res, function () {
+            res.send({ msg : ''});
+        });
+      });
+    }
   });
 });
-
 
 /* POST to Users. */
 router.post('/users', function(req, res) {
   passport.authenticate('local', function(err, user, info){
-    if(err)
-      res.render('error');
-
-    if(!user)
-      res.render('login', { title : 'Login', success : false });
+    if (err) {
+      res.send({ msg : err });
+    }
+    if (!user) {
+      res.send({ msg : "DNE" });
+    }
 
     passport.authenticate('local')(req, res, function () {
-        res.render('users', { user : user });
+      res.send({msg : ""});
     });
   })(req, res);
 });

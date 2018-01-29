@@ -10,16 +10,11 @@ var uri = 'mongodb://poopsquad:poopsquad@poop-cluster-shard-00-00-yv2oe.mongodb.
 mongoose.connect(uri);
 var db = mongoose.connection;
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('users/index', { user : req.user });
-});
-
 router.get('/users', function(req, res, next) {
-  res.render('users/index', { user : req.user });
+  res.render('users/index', { title : 'Contacts', user : req.user });
 });
 
-router.get('/contacts', function(req, res, next) {
+router.get('/userlist', function(req, res, next) {
   var id = new ObjectId(req.user._id);
   var query = Contact.find({});
   query.where('user_id', id);
@@ -28,15 +23,18 @@ router.get('/contacts', function(req, res, next) {
     if(err)
       console.log(err);
     else {
-      res.render('users/contacts', { title : 'Contacts', user : req.user, contactsList : contact });
+      res.json(contact);
     }});
 });
 
-/* POST new Contact */
-router.post('/contacts', function(req, res) { 
-  if (!req.body.firstName || !req.body.lastName || !req.body.nickname || !req.body.address || !req.body.email || !req.body.homePhone || !req.body.cellPhone)
-    res.render('contacts', {title: 'Add Contact', success : false});
+router.get('/contacts', function(req, res, next) {
+  if(!req.user)
+    res.render("error");
 
+  res.render('users/contacts', { title : 'Contacts', user : req.user });
+});
+
+router.post('/adduser', function(req, res) {
   // create Contact object for new contact
   var new_contact = new Contact({
     user_id: new ObjectId(req.user._id),
@@ -51,21 +49,29 @@ router.post('/contacts', function(req, res) {
 
   // save new contact to the db
   new_contact.save(function(err) {
-    if(err)
-      console.log(err);
+    res.send(
+        (err === null) ? { msg: '' } : { msg: err }
+    );
   });
 
-  // refresh list to show new contact
-  var id = new ObjectId(req.user._id);
-  var query = Contact.find({});
-  query.where('user_id', id);
+});
 
-  query.exec(function(err, contact) {
-    if(err)
-      console.log(err);
-    else {
-      res.render('users/contacts', { title : 'Contacts', user : req.user, contactsList : contact });
-    }});
+router.delete('/deleteuser/:id', function(req, res) {
+
+    var userToDelete = new ObjectId(req.params.id);
+
+    Contact.remove({ _id : userToDelete}, function(err) {
+      res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+    });
+
+});
+
+router.get('/about', function(req, res, next) {
+  res.render('users/about', { user : req.user });
+});
+
+router.get('/profile', function(req, res, next) {
+  res.render('users/profile', { user : req.user });
 });
 
 router.get('/logout', function(req, res) {
