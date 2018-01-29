@@ -1,10 +1,13 @@
 extends layout
 
 block content
+  .jumbotron.text-center
+    h1 #{title}
+    p.lead
+      | Welcome to the MEAN Stack Application by
+      strong   Group 10!
   center
-    h1= title
     if (!user)
-      p Welcome to #{title}!
       a(href="/login")
         button.btn.btn-primary(type="button") Login
       |&nbsp;
