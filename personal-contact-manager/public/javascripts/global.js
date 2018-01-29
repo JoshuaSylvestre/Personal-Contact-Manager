@@ -3,23 +3,21 @@ $(document).ready(function() {
   if(window.location.href.indexOf("users/") > -1) {
     // Populate the user table on initial page load
     listUsers();
-
-    // Onclick event for add user
-    $('#btnAddUser').on('click', addUser);
-
-    // Onclick event for YOU GUESSED IT! delete user
-    $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
-
-  	// Need to use keyup since keypress eats user input :x
-  	$('#inputSearch').on('keyup', searchUser);
-
-  	// Onclick event for search button
-  	$('#btnSearchUser').on('click', searchUser);
   }
-  else {
-    $('#btnLoginUser').on('click', loginUser);
-    $('#btnRegisterUser').on('click', registerUser);
-  }
+  // Onclick event for add user
+  $('#btnAddUser').on('click', addUser);
+
+  // Onclick event for YOU GUESSED IT! delete user
+  $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
+
+	// Need to use keyup since keypress eats user input :x
+	$('#inputSearch').on('keyup', searchUser);
+
+	// Onclick event for search button
+	$('#btnSearchUser').on('click', searchUser);
+
+  $('#btnLoginUser').on('click', loginUser);
+  $('#btnRegisterUser').on('click', registerUser);
 
 });
 
