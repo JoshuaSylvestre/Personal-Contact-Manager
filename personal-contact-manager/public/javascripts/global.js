@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-  
+
   if(window.location.href.indexOf("users/") > -1) {
     // Populate the user table on initial page load
     listUsers();
@@ -249,7 +249,7 @@ function searchUser(event) {
 
       // For each item in the JSON, only print for desired substrings
       $.each(data, function(){
-		  if(this.firstName.concat(" " + this.lastName).toLowerCase().indexOf(substr) != -1)
+		  if(this.firstName.concat(" " + this.lastName).toLowerCase().indexOf(substr.toLowerCase()) != -1)
 		  {
 			tableContent += '<tr>';
 			tableContent += '<td>' + this.firstName + '</td>';
