@@ -2,46 +2,43 @@ extends ../layout
 //script(type="javascript",src='../../public/javascripts/global.js')
 
 block content
-  br
   h1= title
   br
   br
-  h4 Add Contact
-  #addUser
-    fieldset
-      .row
-        .form-group.col-md-6
-          input#inputFirstName.form-control(type='text', name="firstName", placeholder='First Name')
-        .form-group.col-md-6
-          input#inputLastName.form-control(type='text', name="lastName", placeholder='Last Name')
-        .form-group.col-md-6
-          input#inputNickname.form-control(type='text', name="nickname", placeholder='Nickname')
-        .form-group.col-md-6
-          input#inputAddress.form-control(type='text', name="address", placeholder='Address')
-      .row
-        .form-group.col-md-6
-          input#inputEmail.form-control(type='text', name="email", placeholder='Email')
-        .form-group.col-md-6
-          input#inputHomePhone.form-control(type='text', name="homePhone", placeholder='Home Phone')
-        .form-group.col-md-6
-          input#inputCellPhone.form-control(type='text', name="cellPhone", placeholder='Cell Phone')
-      br
-      button#btnAddUser.btn.btn-primary Add
-  br
-  .form-inline.my-2.my-lg-0
-      button#btnSearchUser.btn.btn-primary Search  	
-      input#inputSearch.form-control(type='text', name="search", placeholder='Search')  
-  br
-  br
-  #contactsTable
-    table.table
-      thead
-        th First Name
-        th Last Name
-        th Nickname
-        th Address
-        th Email
-        th Home Phone
-        th Cell Phone
-        th
-      tbody
+  .row
+    .col-md-2
+      #addUser
+        h4 Add Contact
+          p
+          fieldset
+            .form-group
+              input#inputFirstName.form-control(type='text', name="firstName", placeholder='First Name')
+              input#inputLastName.form-control(type='text', name="lastName", placeholder='Last Name')
+              input#inputNickname.form-control(type='text', name="nickname", placeholder='Nickname')
+              input#inputAddress.form-control(type='text', name="address", placeholder='Address')
+              input#inputEmail.form-control(type='text', name="email", placeholder='Email')
+              input#inputHomePhone.form-control(type='text', name="homePhone", placeholder='Home Phone')
+              input#inputCellPhone.form-control(type='text', name="cellPhone", placeholder='Cell Phone')
+              br
+              button#btnAddUser.btn.btn-primary Add
+      p
+      #searchUser
+        h4 Search Contact
+          p
+          .form-group
+            input#inputSearch.form-control(type='text', name="search", placeholder='Name')
+            br
+            button#btnSearchUser.btn.btn-primary Search
+    .col-md-10
+      #contactsTable
+        table.table
+          thead
+            th First Name
+            th Last Name
+            th Nickname
+            th Address
+            th Email
+            th Home Phone
+            th Cell Phone
+            th
+          tbody

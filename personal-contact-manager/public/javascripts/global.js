@@ -9,13 +9,13 @@ $(document).ready(function() {
 
     // Onclick event for YOU GUESSED IT! delete user
     $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
-	
+
 	// Need to use keyup since keypress eats user input :x
 	$('#inputSearch').on('keyup', searchUser);
 
 	// Onclick event for search button
 	$('#btnSearchUser').on('click', searchUser);
-	
+
 });
 
 function listUsers() {
@@ -128,20 +128,18 @@ function deleteUser(event) {
 };
 
 function searchUser(event) {
-	
+
   event.preventDefault();
-  
+
   // USER LIST FORMAT:
   // firstName, lastName, nickname, address, email, homePhone, cellPhone
 
-  var substr = document.getElementById('inputSearch').value
+  var substr = document.getElementById('inputSearch').value;
 
-//  console.log(substr);
-  
   // Empty search results to keep search up to date
   var tableContent = '';
   tableContent += '<tr>';
-  tableContent += '</tr>';  
+  tableContent += '</tr>';
 
   // jQuery AJAX call for JSON
   $.getJSON('/users/userlist', function(data) {
@@ -159,12 +157,12 @@ function searchUser(event) {
 			tableContent += '<td>' + this.homePhone + '</td>';
 			tableContent += '<td>' + this.cellPhone + '</td>';
 			tableContent += '<td><button href="#" class="deleteUserLink btn btn-danger" rel="' + this._id + '">Delete</button></td>';
-			tableContent += '</tr>';			  
+			tableContent += '</tr>';
 		  }
       });
-	  
+
 	  // Inject the whole content string into our existing HTML table
       $('#contactsTable table.table tbody').html(tableContent);
- 
+
     });
 }

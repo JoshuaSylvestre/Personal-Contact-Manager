@@ -1,15 +1,18 @@
 extends ../layout
 
 block content
-  br
-  br
   div
-     center
-        h1 YOUR PROFILE
-        
-  p First Name: #{user.firstName}
-  p Last Name: #{user.lastName}
-  p Username: #{user.username}
-  p Email: #{user.email}
-  
-  
+    h1 Lookin' good, #{user.firstName}!
+    br
+    p
+      b First Name:
+      | &nbsp; #{user.firstName}
+    p
+      b Last Name:
+      | &nbsp; #{user.lastName}
+    p
+      b Username:
+      | &nbsp; #{user.username}
+    p
+      b Email:
+      | &nbsp; #{user.email}

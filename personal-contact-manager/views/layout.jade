@@ -21,22 +21,23 @@ html
             a.nav-link(href='/')
               | Home
             span.sr-only (current)
-          li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
-            a.nav-link(href='/users/contacts') Contacts
+          if(user)
+            li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
+              a.nav-link(href='/users/contacts') Contacts
           li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
             a.nav-link(href='/users/profile') Profile
           li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
             a.nav-link(href='/users/about') About
 
         ul.navbar-nav.navbar-right
-          li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
-            a.nav-link(href='/logout') Logout
-          li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
-            a.nav-link(href='/register') Register
-
-      form.form-inline.my-2.my-lg-0
-        input.form-control.mr-sm-2(type='text', placeholder='How to POOP')
-        button.btn.btn-secondary.my-2.my-sm-0(type='submit') Search
+          if(user)
+            li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
+              a.nav-link(href='/logout') Logout
+          if(!user)
+            li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
+              a.nav-link(href='/login') Login
+            li.nav-item([routerlinkactive]="['active']", [routerlinkactiveoptions]='{exact:true}')
+              a.nav-link(href='/register') Register
 
     .container
       block content
