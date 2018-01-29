@@ -17,13 +17,56 @@ $(document).ready(function() {
   	$('#btnSearchUser').on('click', searchUser);
   }
   else {
-
+    $('#btnLoginUser').on('click', loginUser);
   }
 
 });
 
 function loginUser() {
+  event.preventDefault();
 
+  // Super basic validation - increase errorCount variable if any fields are blank
+  var errorCount = 0;
+  $('#loginUser input').each(function(index, val) {
+      if($(this).val() === '') { errorCount++; }
+  });
+
+  // Check and make sure errorCount's still at zero
+  if(errorCount === 0) {
+      // If it is, compile all user info into one object
+      var logUser = {
+        'username': $('#loginUser fieldset input#inputUsername').val().trim(),
+        'password': $('#loginUser fieldset input#inputPassword').val()
+      }
+
+      // Use AJAX to post the object to our adduser service
+      $.ajax({
+        type: 'POST',
+        data: logUser,
+        url: '/users',
+        dataType: 'JSON'
+      }).done(function(response) {
+        // Check for successful (blank) response
+        if (response.msg === '') {
+            // Successful log
+            window.location.href = 'users/contacts';
+        }
+        else if(response.msg === 'DNE') {
+          if($('#loginErrorIncomplete').is(":visible"))
+            $('#loginErrorIncomplete').hide();
+
+          $('#loginErrorDNE').show();
+        }
+      });
+  }
+  else {
+    if($('#loginErrorDNE').is(":visible"))
+      $('#loginErrorDNE').hide();
+
+      // If errorCount is more than 0, error out
+      $('#loginErrorIncomplete').show();
+      return false;
+  }
 };
 
 function listUsers() {

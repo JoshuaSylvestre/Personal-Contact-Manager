@@ -46,18 +46,18 @@ router.post('/register', function(req, res) {
   });
 });
 
-
 /* POST to Users. */
 router.post('/users', function(req, res) {
   passport.authenticate('local', function(err, user, info){
-    if(err)
-      res.render('error');
-
-    if(!user)
-      res.render('login', { title : 'Login', success : false });
+    if (err) {
+      res.send({ msg : err });
+    }
+    if (!user) {
+      res.send({ msg : "DNE" });
+    }
 
     passport.authenticate('local')(req, res, function () {
-        res.render('users', { user : user });
+      res.send({msg : ""});
     });
   })(req, res);
 });

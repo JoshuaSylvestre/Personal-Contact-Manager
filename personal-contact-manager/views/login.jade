@@ -3,15 +3,16 @@ extends layout
 block content
   h1=title
   br
-  if(!success)
-    p User and password match not found :(
+  p#loginErrorDNE.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') User and password match not found :(
+  p#loginErrorIncomplete.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') Please fill in all fields!
 
-  form(role='form', action="/users",method="post", style='max-width: 300px;')
+  #loginUser
+    fieldset
       .form-group
-          input.form-control(type='text', name="username", placeholder='Username')
+          input#inputUsername.form-control(type='text', name="username", placeholder='Username')
       .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-primary(type='submit') Submit
+        input#inputPassword.form-control(type='password', name="password", placeholder='Password')
+      button#btnLoginUser.btn.btn-primary Login
       |&nbsp;
       |&nbsp;
       a(href='/')
