@@ -49,3 +49,5 @@ Finally, run the project!
 $ npm start
 ```
 If all is successful, the contact manager should be available at your `localhost` on `port 3000` (`http://localhost:3000/`).
+
+Or, you can visit the hosted website: https://personal-contact-manager.herokuapp.com/
