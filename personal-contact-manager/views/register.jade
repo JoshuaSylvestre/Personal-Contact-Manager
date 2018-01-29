@@ -3,22 +3,23 @@ extends layout
 block content
   h1=title
   br
-  if(!success)
-    p.bg-danger(style='max-width: 300px; padding:5px; text-align:center;') Please fill out all fields to register!
+  p#registerErrorGeneric.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') Cannot register user at the moment. Please try again!
+  p#registerErrorIncomplete.bg-danger(style='max-width: 300px; padding:5px; text-align:center; display:none;') Please fill in all fields!
 
-  form(role='form', action="/register", method="post", style='max-width: 300px;')
-    .form-group
-        input.form-control(type='text', name="firstName", placeholder='First Name')
-    .form-group
-        input.form-control(type='text', name="lastName", placeholder='Last Name')
-    .form-group
-        input.form-control(type='text', name="email", placeholder='Email')
-    .form-group
-        input.form-control(type='text', name="username", placeholder='Username')
-    .form-group
-      input.form-control(type='password', name="password", placeholder='Password')
-    button.btn.btn-primary(type='submit') Submit
-    | &nbsp;
-    | &nbsp;
-    a(href='/')
-      button.btn.btn-danger(type="button") Cancel
+  #registerUser
+    fieldset(style="width:300px;")
+      .form-group
+          input#inputFirstName.form-control(type='text', name="firstName", placeholder='First Name')
+      .form-group
+          input#inputLastName.form-control(type='text', name="lastName", placeholder='Last Name')
+      .form-group
+          input#inputEmail.form-control(type='text', name="email", placeholder='Email')
+      .form-group
+          input#inputUsername.form-control(type='text', name="username", placeholder='Username')
+      .form-group
+        input#inputPassword.form-control(type='password', name="password", placeholder='Password')
+      button#btnRegisterUser.btn.btn-primary Register
+      | &nbsp;
+      | &nbsp;
+      a(href='/')
+        button.btn.btn-danger(type="button") Cancel

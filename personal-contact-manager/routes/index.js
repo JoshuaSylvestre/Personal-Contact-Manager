@@ -27,21 +27,19 @@ router.get('/users', function(req, res, next) {
 /* POST to Register */
 router.post('/register', function(req, res) {
 
-  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.username || !req.body.password)
-    res.render('register', { title : 'Register', success : false });
-
   User.register(new User({
       firstName : req.body.firstName,
       lastName : req.body.lastName,
       email : req.body.email,
       username : req.body.username
       }), req.body.password, function(err, user) {
+
       if (err) {
-          return res.render('error', { user : user });
+          return res.send({ msg : "GEN" });
       }
 
     passport.authenticate('local')(req, res, function () {
-        res.render('users', { user : user });
+        res.send({ msg : ""});
     });
   });
 });

@@ -18,9 +18,61 @@ $(document).ready(function() {
   }
   else {
     $('#btnLoginUser').on('click', loginUser);
+    $('#btnRegisterUser').on('click', registerUser);
   }
 
 });
+
+function registerUser() {
+  event.preventDefault();
+
+  // Super basic validation - increase errorCount variable if any fields are blank
+  var errorCount = 0;
+  $('#registerUser input').each(function(index, val) {
+      if($(this).val() === '') { errorCount++; }
+  });
+
+  // Check and make sure errorCount's still at zero
+  if(errorCount === 0) {
+      // If it is, compile all user info into one object
+      var registerUser = {
+        'firstName': $('#registerUser fieldset input#inputFirstName').val().trim(),
+        'lastName': $('#registerUser fieldset input#inputLastName').val().trim(),
+        'email': $('#registerUser fieldset input#inputEmail').val().trim(),
+        'username': $('#registerUser fieldset input#inputUsername').val().trim(),
+        'password': $('#registerUser fieldset input#inputPassword').val()
+
+      }
+
+      // Use AJAX to post the object to our adduser service
+      $.ajax({
+        type: 'POST',
+        data: registerUser,
+        url: '/register',
+        dataType: 'JSON'
+      }).done(function(response) {
+        // Check for successful (blank) response
+        if (response.msg === '') {
+            // Successful log
+            window.location.href = 'users/contacts';
+        }
+        else {
+          if($('#registerErrorIncomplete').is(":visible"))
+            $('#registerErrorIncomplete').hide();
+
+          $('#registerErrorGeneric').show();
+        }
+      });
+  }
+  else {
+    if($('#registerErrorGeneric').is(":visible"))
+      $('#registerErrorGeneric').hide();
+
+    // If errorCount is more than 0, error out
+    $('#registerErrorIncomplete').show();
+    return false;
+  }
+};
 
 function loginUser() {
   event.preventDefault();
