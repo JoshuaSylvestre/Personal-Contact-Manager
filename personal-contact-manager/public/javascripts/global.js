@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-
+  if(window.location.href.indexOf("users/") > -1) {
     // Populate the user table on initial page load
     listUsers();
 
@@ -10,13 +10,21 @@ $(document).ready(function() {
     // Onclick event for YOU GUESSED IT! delete user
     $('#contactsTable table tbody').on('click', 'td button.deleteUserLink', deleteUser);
 
-	// Need to use keyup since keypress eats user input :x
-	$('#inputSearch').on('keyup', searchUser);
+  	// Need to use keyup since keypress eats user input :x
+  	$('#inputSearch').on('keyup', searchUser);
 
-	// Onclick event for search button
-	$('#btnSearchUser').on('click', searchUser);
+  	// Onclick event for search button
+  	$('#btnSearchUser').on('click', searchUser);
+  }
+  else {
+
+  }
 
 });
+
+function loginUser() {
+
+};
 
 function listUsers() {
   // USER LIST FORMAT:
@@ -26,7 +34,7 @@ function listUsers() {
   var tableContent = '';
 
   // jQuery AJAX call for JSON
-  $.getJSON('/users/userlist', function(data) {
+  $.getJSON('userlist', function(data) {
 
       // For each item in the JSON, add a table row and cells to the content string
       $.each(data, function(){
@@ -75,7 +83,7 @@ function addUser(event) {
         $.ajax({
             type: 'POST',
             data: newUser,
-            url: '/users/adduser',
+            url: '/adduser',
             dataType: 'JSON'
         }).done(function( response ) {
 
@@ -110,7 +118,7 @@ function deleteUser(event) {
 
     $.ajax({
         type: 'DELETE',
-        url: '/users/deleteuser/' + $(this).attr('rel')
+        url: '/deleteuser/' + $(this).attr('rel')
     }).done(function( response ) {
 
         // Check for a successful (blank) response
@@ -142,7 +150,7 @@ function searchUser(event) {
   tableContent += '</tr>';
 
   // jQuery AJAX call for JSON
-  $.getJSON('/users/userlist', function(data) {
+  $.getJSON('/userlist', function(data) {
 
       // For each item in the JSON, only print for desired substrings
       $.each(data, function(){
@@ -165,4 +173,4 @@ function searchUser(event) {
       $('#contactsTable table.table tbody').html(tableContent);
 
     });
-}
+};
